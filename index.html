@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Form  Validation</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container{
+            max-width: 600px;
+            margin: 60px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1{
+            text-align: center;
+            color: #333;
+        }
+        form{
+            margin-top: 20px;
+        }
+        .formGroup{
+            margin-bottom: 15px;
+        }
+        label{
+            display: block;
+            margin-bottom: 5px;
+        }
+        input{
+            display: block;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        #btn{
+            padding: 8px 15px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        #btn:hover{
+            background-color: #0056b3;
+        }
+        .errorMessage{
+            color: #ff0000;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>JavaScript Form  Validation</h1>
+        <form id="signUpForm" novalidate>
+        <div class="formGroup">
+            <label for="name">Name:</label>
+            <input type="text" id="nameInput" name="name" placeholder="Enter name" required>
+            <div class="errorMessage" id="nameError"></div>
+        </div>
+        <div class="formGroup">
+            <label for="email">Email:</label>
+            <input type="email" id="emailInput" name="email" placeholder="Enter Email" required>
+            <div class="errorMessage" id="emaliError"></div>
+        </div>
+        <div class="formGroup">
+            <label for="password">PassWord:</label>
+            <input type="password" id="passwordInput" name="password" placeholder="Enter Password" required/>
+            <div class="errorMessage" id="passwordError"></div>
+        </div>
+        <button type="submit" id="btn">Sign Up</button>
+    </form>
+    </div>
+
+    <script>
+
+        let signUpForm = document.getElementById('signUpForm');
+
+        let nameInput = document.getElementById('nameInput');
+
+        let emailInput = document.getElementById('emailInput');
+
+        let passwordInput = document.getElementById('passwordInput');
+
+        let nameError = document.getElementById('nameError');
+
+        let emailError = document.getElementById('emaliError');
+
+        let passwordError = document.getElementById('passwordError');
+
+        let btn = document.getElementById('btn');
+
+        signUpForm.addEventListener('submit',(e)=>{
+            let isValid = true;
+
+            if(nameInput.value.trim() === ''){
+                nameError.textContent = 'Name is Required';
+                isValid = false;
+            }else{
+                nameError.textContent = '';
+            }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if(!emailRegex.test(emailInput.value.trim())){
+                emailError.textContent = 'Invalid Email Id';
+                isValid = false;
+            }else{
+                emailError.textContent = '';
+            }
+
+            if(passwordInput.value.length < 6){
+                passwordError.textContent = 'Passord Must Be At Least 6 Character';
+                isValid = false;
+            }else{
+                passwordError.textContent = '';
+            }
+            if(!isValid){
+                e.preventDefault();
+            }
+        })
+
+    </script>
+</body>
+</html>
